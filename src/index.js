@@ -1,13 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
+import { Chart } from "frappe-charts";
 
 import "./styles.css";
 
 function App() {
+  useEffect(() => {
+    const data = {
+      labels: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+      datasets: [{ values: [18, 40, 30, 35, 8, 52, 17, -4] }]
+    };
+
+    const chart = new Chart("#chart", {
+      data: data,
+      type: "bar",
+      height: 140,
+      colors: ["red"]
+    });
+
+    return () => {
+      chart.unbindWindowEvents();
+    };
+  }, []);
+
   return (
-    <div className="App">
-      <h1>Hello CodeSandbox</h1>
-      <h2>Start editing to see some magic happen!</h2>
+    <div>
+      hoi
+      <div id="chart" style={{ opacity: "1", zIndex: "9999" }} />
     </div>
   );
 }
